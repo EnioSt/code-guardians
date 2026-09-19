@@ -1,13 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>code-guardians</title>
+
+    <!-- Título da Página -->
+    <title>Code Guardians | Repositório de Atas</title>
+
+    <!-- Meta Tags Básicas de SEO -->
+    <meta
+      name="description"
+      content="Repositório oficial de atas de reunião, alinhamentos e documentações da squad Code Guardians."
+    />
+    <meta name="author" content="Code Guardians" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Cor da Barra de Navegação no Celular (combina com o tema escuro do site) -->
+    <meta name="theme-color" content="#020617" />
+
+    <!-- Meta Tags para Compartilhamento (WhatsApp, Slack, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Code Guardians | Repositório de Atas" />
+    <meta
+      property="og:description"
+      content="Acompanhe as decisões, atas e direcionamentos da squad Code Guardians."
+    />
+    <meta property="og:image" content="/assets/img/banner-desktop.jpg" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <link rel="icon" type="image/svg+xml" href="/src/assets/icon2.png" />
   </head>
-  <body>
+  <body
+    class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-600 selection:text-white"
+  >
+    <!-- Container onde a aplicação React é montada -->
     <div id="root"></div>
+
+    <!-- Script principal do Vite -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
