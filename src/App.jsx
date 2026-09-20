@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { HeroSection } from "./components/layout/header/index.jsx";
 
 function App() {

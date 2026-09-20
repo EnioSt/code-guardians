@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* 
+  Definição das Variáveis de Cores:
+  - :root -> Tema Claro (Light Mode)
+  - .dark -> Tema Escuro (Dark Mode)
+*/
+
+:root {
+  /* Fundo azul claro e suave */
+  --bg-primary: #f0f5fa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #e8f0f8;
+
+  /* Textos azuis escuros / quase pretos */
+  --text-primary: #0b192c;
+  --text-secondary: #2c425d;
+
+  /* Bordas e detalhes */
+  --border-color: #d1e1f0;
+  --accent-color: #0284c7;
+}
+
+.dark {
+  /* Fundo azul profundo / noturno */
+  --bg-primary: #070d18;
+  --bg-card: #0e1726;
+  --bg-card-hover: #162438;
+
+  /* Textos quase brancos / acinzentados */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+
+  /* Bordas e detalhes */
+  --border-color: #1e293b;
+  --accent-color: #38bdf8;
+}
+
+/* Aplicação global da fonte de código e transição suave de tema */
+body {
+  font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+  min-height: 100vh;
+}
