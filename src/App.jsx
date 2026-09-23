@@ -1,13 +1,8 @@
-import { ThemeToggle } from "./components/button";
 import { HeroSection } from "./components/hero";
 
 function App() {
   return (
     <div className="min-h-screen">
-      {/* Botão de troca de tema */}
-      <ThemeToggle />
-
-      {/* Seção Hero no topo */}
       <HeroSection />
 
       {/* Área dos Cards de Atas */}
