@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HelpCircle } from "lucide-react";
-import { Modal } from "../common/Modal";
+import { Modal } from "../modal";
 
 export function FloatingFaq() {
   const [isOpen, setIsOpen] = useState(false);
