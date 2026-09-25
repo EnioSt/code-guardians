@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Calendar, FileDown, ArrowLeft } from "lucide-react";
 import { minutesData } from "../../data/minuteData";
 import { ThemeToggle } from "../../components/button";
+import icon from "../../assets/icon.png";
 
 export function MinutesPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,7 +40,7 @@ export function MinutesPage() {
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--bg-card-hover)]">
               {/* Pode ser a imagem /assets/img/icon.png ou um ícone */}
               <img
-                src="/icon.png"
+                src={icon}
                 alt="Logo Code Guardians"
                 className="h-full w-full object-cover"
                 onError={(e) => {
@@ -56,8 +57,8 @@ export function MinutesPage() {
                 />
                 <span>Voltar à Home</span>
               </div>
-              <span className="font-mono text-sm font-bold text-[var(--text-primary)]">
-                CODE GUARDIANS
+              <span className="font-mono text-xs font-bold tracking-wider text-[var(--accent-color)]">
+                &lt;CODE GUARDIANS /&gt;
               </span>
             </div>
           </Link>
