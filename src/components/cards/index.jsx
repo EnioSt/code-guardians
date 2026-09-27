@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ExternalLink, ChevronRight, FileText } from "lucide-react";
+import { ExternalLink, ChevronRight, FileText, FileDown } from "lucide-react";
 
 export function ActionCard({
   title,
@@ -72,5 +72,45 @@ export function ActionCard({
     <button type="button" onClick={onClick} className={cardClasses}>
       {content}
     </button>
+  );
+}
+
+export function MinuteCard({ item }) {
+  return (
+    <div className="flex flex-col justify-between rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 shadow-sm transition-all hover:border-[var(--accent-color)] hover:bg-[var(--bg-card-hover)]">
+      <div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-[var(--accent-color)]">
+            [ {item.displayDate} ]
+          </span>
+          {item.tags && (
+            <span className="rounded bg-[var(--accent-color)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--accent-color)]">
+              {item.tags[0]}
+            </span>
+          )}
+        </div>
+
+        <h3 className="mt-3 text-base font-bold text-[var(--text-primary)]">
+          {item.title}
+        </h3>
+
+        <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)] line-clamp-3">
+          {item.description}
+        </p>
+      </div>
+
+      {/* Botão de Acesso ao PDF */}
+      <div className="mt-6 border-t border-[var(--border-color)] pt-4">
+        <a
+          href={item.pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] px-3 py-2 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--accent-color)] hover:text-[var(--accent-color)]"
+        >
+          <FileDown size={15} />
+          <span>Visualizar PDF</span>
+        </a>
+      </div>
+    </div>
   );
 }
