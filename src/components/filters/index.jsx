@@ -1,4 +1,4 @@
-import { Search, Calendar } from "lucide-react";
+import { Search, Calendar, Tag } from "lucide-react";
 
 export function Filters({
   searchTerm,
@@ -69,6 +69,30 @@ export function Filters({
           Limpar
         </button>
       )}
+    </div>
+  );
+}
+
+export function TagFilter({ selectedTag, onTagChange, tags }) {
+  return (
+    <div className="relative inline-flex items-center">
+      <Tag
+        size={14}
+        className="pointer-events-none absolute left-3 text-[var(--text-secondary)]"
+      />
+      <select
+        value={selectedTag}
+        onChange={(e) => onTagChange(e.target.value)}
+        aria-label="Filtrar por tag"
+        className="cursor-pointer rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-8 pr-8 text-xs font-medium text-[var(--text-primary)] transition-colors focus:border-[var(--accent-color)] focus:outline-none"
+      >
+        <option value="">Todas as tags</option>
+        {tags.map((tag) => (
+          <option key={tag} value={tag} className="bg-[var(--bg-card)]">
+            {tag}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

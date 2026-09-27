@@ -3,13 +3,15 @@ import { HeroSection } from "../../components/hero";
 import { ActionCard } from "../../components/cards";
 import { Modal } from "../../components/modal";
 import { FloatingFaq } from "../../components/faq";
-import { FileText, Info, Palette } from "lucide-react";
+import { FileText, Info } from "lucide-react";
+import { FigmaIcon, JiraIcon } from "../../components/icons/Icon";
+import { Footer } from "../../components/layout/footer";
 
 export function Home() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <div className="relative flex min-h-screen flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* 1. Hero no topo absoluto */}
       <HeroSection />
 
@@ -51,12 +53,21 @@ export function Home() {
           <ActionCard
             type="external"
             href="https://www.figma.com"
-            icon={Palette}
+            icon={FigmaIcon}
             title="Protótipos (Figma)"
             description="Acesse as telas navegáveis e o design system oficial no Figma."
           />
+
+          <ActionCard
+            type="external"
+            href="https://l1nq.com/iAC6iPb"
+            icon={JiraIcon}
+            title="Quadro do Jira"
+            description="Acompanhe as sprints, tarefas em andamento e backlog da squad."
+          />
         </div>
       </main>
+      <Footer />
 
       {/* Modal acionado pelo Card 2 */}
       <Modal
