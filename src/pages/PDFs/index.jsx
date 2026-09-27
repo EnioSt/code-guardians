@@ -1,24 +1,34 @@
 import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { Search, Calendar, FileDown, ArrowLeft } from "lucide-react";
+import { FileDown } from "lucide-react";
 import { minutesData } from "../../data/minuteData";
-import { ThemeToggle } from "../../components/button";
-import icon from "../../assets/icon.png";
+import { Header } from "../../components/layout/header";
 
 export function MinutesPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterDate, setFilterDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  // Filtra as atas conforme digitação ou seleção de data
+  // Filtra por termo de busca e intervalo de datas (De / Até)
   const filteredMinutes = useMemo(() => {
     return minutesData.filter((item) => {
+      // Filtro por título
       const matchesTitle = item.title
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
-      const matchesDate = filterDate ? item.date === filterDate : true;
-      return matchesTitle && matchesDate;
+
+      // Filtro por período
+      const matchesStartDate = startDate ? item.date >= startDate : true;
+      const matchesEndDate = endDate ? item.date <= endDate : true;
+
+      return matchesTitle && matchesStartDate && matchesEndDate;
     });
-  }, [searchTerm, filterDate]);
+  }, [searchTerm, startDate, endDate]);
+
+  const handleClearFilters = () => {
+    setSearchTerm("");
+    setStartDate("");
+    setEndDate("");
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">
@@ -29,93 +39,16 @@ export function MinutesPage() {
         - Filtro por data
         - Botão de tema
       */}
-      <header className="sticky top-0 z-30 border-b border-[var(--border-color)] bg-[var(--bg-card)]/90 px-4 py-3 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          {/* Logo / Botão de Voltar para Home */}
-          <Link
-            to="/"
-            className="group flex items-center gap-3 transition-opacity hover:opacity-80"
-            title="Voltar para a página inicial"
-          >
-            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--bg-card-hover)]">
-              {/* Pode ser a imagem /assets/img/icon.png ou um ícone */}
-              <img
-                src={icon}
-                alt="Logo Code Guardians"
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  // Fallback se não encontrar a imagem
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-color)]">
-                <ArrowLeft
-                  size={14}
-                  className="transition-transform group-hover:-translate-x-0.5"
-                />
-                <span>Voltar à Home</span>
-              </div>
-              <span className="font-mono text-xs font-bold tracking-wider text-[var(--accent-color)]">
-                &lt;CODE GUARDIANS /&gt;
-              </span>
-            </div>
-          </Link>
+      <Header
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        startDate={startDate}
+        onStartDateChange={setStartDate}
+        endDate={endDate}
+        onEndDateChange={setEndDate}
+        onClearFilters={handleClearFilters}
+      />
 
-          {/* Filtros de Pesquisa (Título e Data) */}
-          <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center md:max-w-xl md:justify-end">
-            {/* Campo de Busca por Título */}
-            <div className="relative flex-1">
-              <Search
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]"
-              />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Pesquisar por título da ata..."
-                className="w-full rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-9 pr-3 text-xs text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:border-[var(--accent-color)] focus:outline-none"
-              />
-            </div>
-
-            {/* Campo de Filtro por Data */}
-            <div className="relative">
-              <Calendar
-                size={16}
-                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]"
-              />
-              <input
-                type="date"
-                value={filterDate}
-                onChange={(e) => setFilterDate(e.target.value)}
-                className="w-full rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-9 pr-3 text-xs text-[var(--text-primary)] focus:border-[var(--accent-color)] focus:outline-none sm:w-auto"
-              />
-            </div>
-
-            {/* Limpar Filtros (só aparece se algum filtro estiver ativo) */}
-            {(searchTerm || filterDate) && (
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilterDate("");
-                }}
-                className="text-xs text-[var(--accent-color)] hover:underline whitespace-nowrap"
-              >
-                Limpar
-              </button>
-            )}
-
-            {/* Botão de Tema no Header */}
-            <div className="hidden sm:block">
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* CONTEÚDO PRINCIPAL (LISTA DE ATAS) */}
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-tight text-[var(--text-primary)] sm:text-2xl">
