@@ -3,32 +3,43 @@ import { minutesData } from "../../data/minuteData";
 import { Header } from "../../components/layout/header";
 import { MinuteCard } from "../../components/cards";
 import { Footer } from "../../components/layout/footer";
+import { TagFilter } from "../../components/filters";
 
 export function MinutesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
 
-  // Filtra por termo de busca e intervalo de datas (De / Até)
+  // 1. Extrai automaticamente a lista única de tags a partir dos dados
+  const availableTags = useMemo(() => {
+    const tagsSet = new Set();
+    minutesData.forEach((item) => {
+      item.tags?.forEach((tag) => tagsSet.add(tag));
+    });
+    return Array.from(tagsSet);
+  }, []);
+
+  // 2. Filtra por título, período de datas e tag
   const filteredMinutes = useMemo(() => {
     return minutesData.filter((item) => {
-      // Filtro por título
       const matchesTitle = item.title
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
 
-      // Filtro por período
       const matchesStartDate = startDate ? item.date >= startDate : true;
       const matchesEndDate = endDate ? item.date <= endDate : true;
+      const matchesTag = selectedTag ? item.tags?.includes(selectedTag) : true;
 
-      return matchesTitle && matchesStartDate && matchesEndDate;
+      return matchesTitle && matchesStartDate && matchesEndDate && matchesTag;
     });
-  }, [searchTerm, startDate, endDate]);
+  }, [searchTerm, startDate, endDate, selectedTag]);
 
   const handleClearFilters = () => {
     setSearchTerm("");
     setStartDate("");
     setEndDate("");
+    setSelectedTag("");
   };
 
   return (
@@ -51,10 +62,22 @@ export function MinutesPage() {
       />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-xl font-bold tracking-tight text-[var(--text-primary)] sm:text-2xl">
             Atas de Reunião ({filteredMinutes.length})
           </h1>
+
+          {/* O filtro de tags fica aqui */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[var(--text-secondary)]">
+              Categoria:
+            </span>
+            <TagFilter
+              tags={availableTags}
+              selectedTag={selectedTag}
+              onTagChange={setSelectedTag}
+            />
+          </div>
         </div>
 
         {/* Estado Vazio (Nenhum resultado encontrado) */}
