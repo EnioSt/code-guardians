@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "../button";
-import { MinutesFilters } from "./MinutesFilters";
+import { Filters } from "../../filters";
 import icon from "../../assets/icon.png";
 
-export function MinutesHeader({
+export function Header({
   searchTerm,
   onSearchChange,
   startDate,
@@ -48,7 +48,7 @@ export function MinutesHeader({
 
         {/* Inputs de Filtro */}
         <div className="flex flex-1 items-center justify-end gap-3">
-          <MinutesFilters
+          <Filters
             searchTerm={searchTerm}
             onSearchChange={onSearchChange}
             startDate={startDate}
