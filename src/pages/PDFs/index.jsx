@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { minutesData } from "../../data/minuteData";
 import { Header } from "../../components/layout/header";
 import { MinuteCard } from "../../components/cards";
+import { Footer } from "../../components/layout/footer";
 
 export function MinutesPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -73,13 +74,7 @@ export function MinutesPage() {
         )}
       </main>
 
-      {/* FOOTER SIMPLES */}
-      <footer className="border-t border-[var(--border-color)] bg-[var(--bg-card)] py-6 text-center text-xs text-[var(--text-secondary)]">
-        <div className="mx-auto max-w-6xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; 2026 Desenvolvido por Enio Junior</span>
-          <span className="font-mono text-[10px] opacity-70">v1.0.0</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
