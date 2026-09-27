@@ -100,7 +100,7 @@ export function MinuteCard({ item }) {
       </div>
 
       {/* Botão de Acesso ao PDF */}
-      <div className="mt-6 border-t border-[var(--border-color)] pt-4">
+      <div className="mt-6 border-t border-[var(--border-color)] pt-4 ">
         <a
           href={item.pdfUrl}
           target="_blank"
