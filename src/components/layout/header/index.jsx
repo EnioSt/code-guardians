@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { ThemeToggle } from "../button";
 import { Filters } from "../../filters";
-import icon from "../../assets/icon.png";
+import icon from "../../../assets/icon.png";
+import { ThemeToggle } from "../../button";
 
 export function Header({
   searchTerm,
