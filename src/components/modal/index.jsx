@@ -20,7 +20,7 @@ export function Modal({ isOpen, onClose, title, children }) {
           </h3>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--text-primary)]"
+            className="cursor-pointer rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--text-primary)]"
           >
             <X size={20} />
           </button>

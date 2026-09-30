@@ -11,12 +11,13 @@ export const minutesData = [
   },
   {
     id: "2",
-    title: "Alinhamento Stakeholder Code Guardians",
+    title: "Alinhamento Stakeholder-Code Guardians",
     date: "2026-09-28",
     displayDate: "28/09/2026",
     description:
-      "Reunião de alinhamento para debater os resultados parciais da pesquisa com usuários e as prioridades do MVP. Os próximos passos definidos incluem estender o formulário por mais uma semana, iniciar entrevistas qualitativas, adotar o modelo Kanban e buscar um Scrum Master mais experiente para a equipe.",
-    pdfUrl: "assets/atas/Alinhamento Stakeholder-Code Guardians-28.09.pdf",
+      "Alinhamento com os stakeholders do projeto Code Guardians para discutir o progresso, desafios e próximos passos.",
+    pdfUrl:
+      "assets/atas/Alinhamento Stakeholder-Code Guardians - 28-09-2026.pdf",
     tags: ["Alinhamento", "Pesquisa"],
   },
 ];
