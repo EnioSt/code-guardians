@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Filters } from "../../filters";
@@ -14,9 +15,21 @@ export function Header({
   onClearFilters,
   showFilters = true,
 }) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Esconde os filtros se a rolagem passar de 20px
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-30 border-b border-[var(--border-color)] bg-[var(--bg-card)]/90 px-4 py-3 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <header className="sticky top-0 z-30 border-b border-[var(--border-color)] bg-[var(--bg-card)]/90 px-4 py-3 backdrop-blur-md transition-all duration-300">
+      <div className="mx-auto flex max-w-6xl flex-col md:flex-row md:items-center md:justify-between md:gap-8">
         {/* Logo e Botão de Voltar */}
         <Link
           to="/"
@@ -48,22 +61,28 @@ export function Header({
         </Link>
 
         {/* Inputs de Filtro */}
-        <div className="flex flex-1 items-center justify-end gap-3">
+        <div
+          className={`flex flex-1 items-center justify-end overflow-hidden transition-all duration-300 ease-in-out origin-top ${
+            showFilters
+              ? isScrolled
+                ? "max-h-0 opacity-0 md:max-h-[300px] md:opacity-100"
+                : "max-h-[300px] opacity-100"
+              : "hidden"
+          }`}
+        >
           {showFilters && (
-            <Filters
-              searchTerm={searchTerm}
-              onSearchChange={onSearchChange}
-              startDate={startDate}
-              onStartDateChange={onStartDateChange}
-              endDate={endDate}
-              onEndDateChange={onEndDateChange}
-              onClearFilters={onClearFilters}
-            />
+            <div className="flex w-full justify-end pt-4 md:pt-0">
+              <Filters
+                searchTerm={searchTerm}
+                onSearchChange={onSearchChange}
+                startDate={startDate}
+                onStartDateChange={onStartDateChange}
+                endDate={endDate}
+                onEndDateChange={onEndDateChange}
+                onClearFilters={onClearFilters}
+              />
+            </div>
           )}
-
-          {/* <div className="hidden sm:block">
-            <ThemeToggle />
-          </div> */}
         </div>
       </div>
     </header>
