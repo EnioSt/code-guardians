@@ -64,7 +64,7 @@ export function Home() {
           />
           <ActionCard
             type="external"
-            href="https://l1nq.com/iAC6iPb"
+            href="https://www.atlassian.com/br/software/jira?campaign=19324540271&adgroup=143040554285&targetid=kwd-855725830&matchtype=e&network=g&device=c&device_model=&creative=642122380510&keyword=jira&placement=&target=&ds_eid=700000001558501&ds_e1=GOOGLE&assetgroupid=&gad_source=1&gad_campaignid=19324540271&gbraid=0AAAAAD_uzhCi9uIm3PeBz24MsoVwOnHXA&gclid=Cj0KCQjw5vLVBhCiARIsAD56SFLQ1yMPLI4MYwt8Z7_xZJObTnvFiyqSTVYaYW14v03Jl4tr5yrtnJ0aAhp3EALw_wcB"
             icon={JiraIcon}
             title="Quadro do Jira"
             description="Acompanhe as sprints, tarefas em andamento e backlog da squad."
