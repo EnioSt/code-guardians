@@ -9,7 +9,7 @@ export function FloatingFaq() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-color)] bg-[var(--accent-color)] text-white shadow-xl transition-all hover:scale-105 active:scale-95"
+        className="cursor-pointer fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-color)] bg-[var(--accent-color)] text-white shadow-xl transition-all hover:scale-105 active:scale-95"
         title="Dúvidas Frequentes (FAQ)"
         aria-label="Abrir FAQ"
       >

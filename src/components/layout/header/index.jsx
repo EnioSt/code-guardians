@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Filters } from "../../filters";
 import icon from "../../../assets/icon.png";
-import { ThemeToggle } from "../../button";
+// import { ThemeToggle } from "../../button";
 
 export function Header({
   searchTerm,
@@ -12,6 +12,7 @@ export function Header({
   endDate,
   onEndDateChange,
   onClearFilters,
+  showFilters = true,
 }) {
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border-color)] bg-[var(--bg-card)]/90 px-4 py-3 backdrop-blur-md">
@@ -48,19 +49,21 @@ export function Header({
 
         {/* Inputs de Filtro */}
         <div className="flex flex-1 items-center justify-end gap-3">
-          <Filters
-            searchTerm={searchTerm}
-            onSearchChange={onSearchChange}
-            startDate={startDate}
-            onStartDateChange={onStartDateChange}
-            endDate={endDate}
-            onEndDateChange={onEndDateChange}
-            onClearFilters={onClearFilters}
-          />
+          {showFilters && (
+            <Filters
+              searchTerm={searchTerm}
+              onSearchChange={onSearchChange}
+              startDate={startDate}
+              onStartDateChange={onStartDateChange}
+              endDate={endDate}
+              onEndDateChange={onEndDateChange}
+              onClearFilters={onClearFilters}
+            />
+          )}
 
-          <div className="hidden sm:block">
+          {/* <div className="hidden sm:block">
             <ThemeToggle />
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

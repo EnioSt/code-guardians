@@ -3,7 +3,7 @@ import { HeroSection } from "../../components/hero";
 import { ActionCard } from "../../components/cards";
 import { Modal } from "../../components/modal";
 import { FloatingFaq } from "../../components/faq";
-import { FileText, Info } from "lucide-react";
+import { BookOpen, FileText, Info } from "lucide-react";
 import { FigmaIcon, JiraIcon } from "../../components/icons/Icon";
 import { Footer } from "../../components/layout/footer";
 
@@ -33,13 +33,19 @@ export function Home() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Card 1: Vai para a página interna de Atas (PDFs) */}
           <ActionCard
+            type="external"
+            href="/docs/plataforma.pdf"
+            icon={BookOpen}
+            title="Visão da Plataforma"
+            description="Plataforma de Comunidades e Networking para Eventos de Tecnologia."
+          />
+          <ActionCard
             type="route"
             to="/atas"
             icon={FileText}
             title="Atas de Reunião"
             description="Consulte todas as atas e decisões registradas em reuniões com filtros por nome e data."
           />
-
           {/* Card 2: Abre um Modal informativo na tela */}
           <ActionCard
             type="modal"
@@ -48,7 +54,6 @@ export function Home() {
             description="Veja o regulamento, papéis dos integrantes e padrões de entrega da squad."
             onClick={() => setIsInfoModalOpen(true)}
           />
-
           {/* Card 3: Link externo (Figma) */}
           <ActionCard
             type="external"
@@ -57,7 +62,6 @@ export function Home() {
             title="Protótipos (Figma)"
             description="Acesse as telas navegáveis e o design system oficial no Figma."
           />
-
           <ActionCard
             type="external"
             href="https://l1nq.com/iAC6iPb"
