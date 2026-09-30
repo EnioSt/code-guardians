@@ -1,14 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { minutesData } from "../../data/minuteData";
 import { PageLayout } from "../../components/layout/PageLayout";
 import { MinuteCard } from "../../components/cards";
 import { TagFilter } from "../../components/filters";
+import { Pagination } from "../../components/pagination";
+
+const ITEMS_PER_PAGE = 12;
 
 export function MinutesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   // 1. Extrai automaticamente a lista única de tags a partir dos dados
   const availableTags = useMemo(() => {
@@ -34,12 +38,29 @@ export function MinutesPage() {
     });
   }, [searchTerm, startDate, endDate, selectedTag]);
 
+  // Reseta para a página 1 sempre que os filtros mudarem
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, startDate, endDate, selectedTag]);
+
   const handleClearFilters = () => {
     setSearchTerm("");
     setStartDate("");
     setEndDate("");
     setSelectedTag("");
   };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Paginação
+  const totalPages = Math.ceil(filteredMinutes.length / ITEMS_PER_PAGE);
+  const paginatedMinutes = filteredMinutes.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
 
   return (
     <PageLayout
@@ -79,12 +100,21 @@ export function MinutesPage() {
           </p>
         </div>
       ) : (
-        /* Grid de Cards de Atas */
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredMinutes.map((item) => (
-            <MinuteCard key={item.id} item={item} />
-          ))}
-        </div>
+        <>
+          {/* Grid de Cards de Atas */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {paginatedMinutes.map((item) => (
+              <MinuteCard key={item.id} item={item} />
+            ))}
+          </div>
+
+          {/* Paginação */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       )}
     </PageLayout>
   );
