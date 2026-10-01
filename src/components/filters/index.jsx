@@ -52,7 +52,7 @@ export function Filters({
             value={startDate}
             onChange={(e) => onStartDateChange(e.target.value)}
             title="Data Inicial"
-            className="w-full min-w-0 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-8 pr-2 text-xs text-[var(--text-primary)] [color-scheme:light] dark:[color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden focus:border-[var(--accent-color)] focus:outline-none sm:w-auto"
+            className="w-full min-w-0 appearance-none rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-8 pr-2 text-xs text-[var(--text-primary)] [color-scheme:light] dark:[color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden focus:border-[var(--accent-color)] focus:outline-none sm:w-auto"
           />
         </div>
 
@@ -74,7 +74,7 @@ export function Filters({
             min={startDate || undefined}
             onChange={(e) => onEndDateChange(e.target.value)}
             title="Data Final"
-            className="w-full min-w-0 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-8 pr-2 text-xs text-[var(--text-primary)] [color-scheme:light] dark:[color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden focus:border-[var(--accent-color)] focus:outline-none sm:w-auto"
+            className="w-full min-w-0 appearance-none rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] py-1.5 pl-8 pr-2 text-xs text-[var(--text-primary)] [color-scheme:light] dark:[color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden focus:border-[var(--accent-color)] focus:outline-none sm:w-auto"
           />
         </div>
       </div>
