@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Modal } from "../../modal";
-import { GithubIcon, LinkedinIcon, InstagramIcon, WhatsappIcon } from "../../icons/Icon";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  InstagramIcon,
+  WhatsappIcon,
+} from "../../icons/Icon";
 
 export function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +53,7 @@ export function Footer() {
           <p>Conecte-se comigo através das minhas redes:</p>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <a
-              href="#"
+              href="https://www.linkedin.com/in/enio-santos-635860161/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-[var(--border-color)] p-3 text-[var(--text-primary)] transition-colors hover:border-[var(--accent-color)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-color)]"
@@ -57,7 +62,7 @@ export function Footer() {
               <span>LinkedIn</span>
             </a>
             <a
-              href="#"
+              href="https://github.com/EnioSt"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-[var(--border-color)] p-3 text-[var(--text-primary)] transition-colors hover:border-[var(--accent-color)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-color)]"
@@ -66,7 +71,7 @@ export function Footer() {
               <span>GitHub</span>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/enio_santosjr/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-[var(--border-color)] p-3 text-[var(--text-primary)] transition-colors hover:border-[var(--accent-color)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-color)]"
@@ -75,7 +80,7 @@ export function Footer() {
               <span>Instagram</span>
             </a>
             <a
-              href="#"
+              href="https://wa.me/+5517997553609"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-[var(--border-color)] p-3 text-[var(--text-primary)] transition-colors hover:border-[var(--accent-color)] hover:bg-[var(--bg-card-hover)] hover:text-[var(--accent-color)]"
