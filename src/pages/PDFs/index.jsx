@@ -1,5 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
-import { minutesData } from "../../data/minuteData";
+import { useState, useMemo } from "react";
+import { minutesData, availableTags } from "../../data/minuteData";
 import { PageLayout } from "../../components/layout/PageLayout";
 import { MinuteCard } from "../../components/cards";
 import { TagFilter } from "../../components/filters";
@@ -13,15 +13,6 @@ export function MinutesPage() {
   const [endDate, setEndDate] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-  // 1. Extrai automaticamente a lista única de tags a partir dos dados
-  const availableTags = useMemo(() => {
-    const tagsSet = new Set();
-    minutesData.forEach((item) => {
-      item.tags?.forEach((tag) => tagsSet.add(tag));
-    });
-    return Array.from(tagsSet);
-  }, []);
 
   // 2. Filtra por título, período de datas e tag
   const filteredMinutes = useMemo(() => {
@@ -38,16 +29,32 @@ export function MinutesPage() {
     });
   }, [searchTerm, startDate, endDate, selectedTag]);
 
-  // Reseta para a página 1 sempre que os filtros mudarem
-  useEffect(() => {
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
     setCurrentPage(1);
-  }, [searchTerm, startDate, endDate, selectedTag]);
+  };
+
+  const handleStartDateChange = (value) => {
+    setStartDate(value);
+    setCurrentPage(1);
+  };
+
+  const handleEndDateChange = (value) => {
+    setEndDate(value);
+    setCurrentPage(1);
+  };
+
+  const handleTagChange = (value) => {
+    setSelectedTag(value);
+    setCurrentPage(1);
+  };
 
   const handleClearFilters = () => {
     setSearchTerm("");
     setStartDate("");
     setEndDate("");
     setSelectedTag("");
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page) => {
@@ -66,11 +73,11 @@ export function MinutesPage() {
     <PageLayout
       headerProps={{
         searchTerm,
-        onSearchChange: setSearchTerm,
+        onSearchChange: handleSearchChange,
         startDate,
-        onStartDateChange: setStartDate,
+        onStartDateChange: handleStartDateChange,
         endDate,
-        onEndDateChange: setEndDate,
+        onEndDateChange: handleEndDateChange,
         onClearFilters: handleClearFilters,
       }}
     >
@@ -87,7 +94,7 @@ export function MinutesPage() {
           <TagFilter
             tags={availableTags}
             selectedTag={selectedTag}
-            onTagChange={setSelectedTag}
+            onTagChange={handleTagChange}
           />
         </div>
       </div>
