@@ -114,7 +114,17 @@ async function updateAtas() {
       };
     });
 
-    const fileContent = `export const minutesData = ${JSON.stringify(minutesData, null, 2)};\n`;
+    // 4. Extrai a lista única de tags disponíveis
+    const tagsSet = new Set();
+    minutesData.forEach((item) => {
+      if (Array.isArray(item.tags)) {
+        item.tags.forEach((tag) => tagsSet.add(tag));
+      }
+    });
+    const availableTags = Array.from(tagsSet);
+
+    let fileContent = `export const minutesData = ${JSON.stringify(minutesData, null, 2)};\n\n`;
+    fileContent += `export const availableTags = ${JSON.stringify(availableTags, null, 2)};\n`;
 
     fs.writeFileSync(outputFile, fileContent);
     console.log(
