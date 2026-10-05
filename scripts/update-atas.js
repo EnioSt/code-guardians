@@ -45,6 +45,13 @@ async function updateAtas() {
       const nameWithoutExt = path.basename(file, ".pdf");
       const dateMatch = nameWithoutExt.match(/(\d{2}-\d{2}-\d{4})$/);
 
+      if (!dateMatch) {
+        console.error(
+          `❌ Erro: O arquivo "${file}" não segue o padrão de nomenclatura "Nome da Ata DD-MM-YYYY.pdf". Renomeie o arquivo e tente novamente.`,
+        );
+        process.exit(1); // Interrompe o processo
+      }
+
       let title = nameWithoutExt;
       let date = "9999-99-99"; // Fallback se não encontrar data (ficará por último)
       let displayDate = "";
@@ -57,6 +64,11 @@ async function updateAtas() {
         if (rawTitle.endsWith("-")) {
           rawTitle = rawTitle.slice(0, -1).trim();
         }
+        
+        if (rawTitle.length > 0) {
+          rawTitle = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1).toLowerCase();
+        }
+        
         title = rawTitle;
 
         const [day, month, year] = dateStr.split("-");
