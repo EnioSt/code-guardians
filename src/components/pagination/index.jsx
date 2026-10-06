@@ -1,43 +1,11 @@
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 
-export function Pagination({ currentPage, totalPages, onPageChange }) {
-  if (totalPages <= 1) return null;
+import { usePagination } from "../../hooks/usePagination";
 
-  // Função para gerar os números das páginas a exibir
-  const getPageNumbers = () => {
-    const pages = [];
-    // Simplificação: se for menos de 6 páginas, mostra todas
-    if (totalPages <= 6) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      // Se for mais, mostra a primeira, a última, e as próximas da atual
-      if (currentPage <= 3) {
-        pages.push(1, 2, 3, 4, "...", totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(
-          1,
-          "...",
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages,
-        );
-      } else {
-        pages.push(
-          1,
-          "...",
-          currentPage - 1,
-          currentPage,
-          currentPage + 1,
-          "...",
-          totalPages,
-        );
-      }
-    }
-    return pages;
-  };
+export function Pagination({ currentPage, totalPages, onPageChange }) {
+  const pages = usePagination({ currentPage, totalPages });
+
+  if (totalPages <= 1) return null;
 
   return (
     <div className="mt-8 flex items-center justify-center gap-2">
@@ -51,7 +19,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
       </button>
 
       <div className="flex items-center gap-1">
-        {getPageNumbers().map((page, index) => (
+        {pages.map((page, index) => (
           <button
             key={index}
             onClick={() =>

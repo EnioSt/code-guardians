@@ -85,7 +85,7 @@ export function MinuteCard({ item }) {
           </span>
           {item.tags && (
             <span className="rounded bg-[var(--accent-color)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--accent-color)]">
-              {item.tags[0]}
+              {item.tags[0]} / {item.tags[1]}
             </span>
           )}
         </div>
