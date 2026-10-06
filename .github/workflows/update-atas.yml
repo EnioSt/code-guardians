@@ -1,0 +1,35 @@
+name: Automate Atas Update
+
+# 1. Gatilho: A action só roda quando um PDF for alterado ou adicionado nesta pasta
+on:
+  push:
+    paths:
+      - "public/assets/atas/**.pdf"
+
+# 2. Permissão para o bot do GitHub poder fazer um commit no seu repositório
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rodar script de atualização
+        run: npm run update-atas
+
+      - name: Commit e Push das alterações
+        # Verifica se o script gerou alguma mudança no minuteData.js. Se sim, commita.
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src/data/minuteData.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update minuteData.js com novas atas" && git push)
